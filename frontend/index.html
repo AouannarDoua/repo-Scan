@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Repo Scan — Assistant d'analyse de repository</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="head-top">
+        <div class="brand">
+          <span class="logo" aria-hidden="true"></span>
+          <h1>Repo&nbsp;Scan</h1>
+        </div>
+        <div class="status" id="status">connexion…</div>
+      </div>
+      <p class="sub">Posez une question en langage naturel sur le dépôt indexé.
+        L'assistant récupère les extraits pertinents, les cite
+        <code>(fichier:lignes)</code> et signale les fichiers critiques.</p>
+
+      <div class="repobar">
+        <span class="repo-chip" id="repo-chip" title="dépôt courant">sample_repo</span>
+        <div class="repo-load">
+          <input id="repo-path" autocomplete="off" spellcheck="false"
+                 placeholder="C:\Users\DOUA__AOUANNAR__\Downloads\AriMayi_Doua_Aouannar\repo-lens\sample_repo   (puis « Indexer »)"
+                 aria-label="Chemin d'un dépôt local">
+          <button class="btn ghost" id="load">Indexer</button>
+          <button class="btn ghost" id="browse" title="Choisir un dossier à importer">Parcourir…</button>
+          <button class="btn ghost" id="reset" title="Revenir au dépôt d'exemple">Exemple</button>
+          <input type="file" id="folder" webkitdirectory directory multiple hidden>
+        </div>
+      </div>
+      <div class="load-msg" id="load-msg" hidden></div>
+    </header>
+
+    <div class="grid">
+      <aside class="panel">
+        <div class="panel-h" role="tablist">
+          <button class="tab" id="tab-files" aria-selected="true" onclick="showTab('files')">Fichiers</button>
+          <button class="tab" id="tab-crit" aria-selected="false" onclick="showTab('crit')">Critiques</button>
+        </div>
+        <div class="legend">
+          <span><i class="dot" style="background:var(--relevance)"></i>code</span>
+          <span><i class="dot" style="background:var(--signal)"></i>config</span>
+          <span><i class="dot" style="background:var(--ink-faint)"></i>doc</span>
+        </div>
+        <div class="panel-body" id="view-files"></div>
+        <div class="panel-body" id="view-crit" hidden></div>
+      </aside>
+
+      <section class="panel console-panel">
+        <div class="console">
+          <div class="qrow">
+            <input id="q" autocomplete="off" aria-label="Votre question"
+                   placeholder="Ex. : où est gérée l'authentification ?">
+            <button class="ask" id="ask">Analyser</button>
+          </div>
+          <div class="chips" id="chips"></div>
+          <div class="answer" id="answer" aria-live="polite">
+            <div class="empty">
+              <span class="empty-mark" aria-hidden="true">⌕</span>
+              Choisissez une question ci-dessus ou tapez la vôtre pour démarrer l'analyse.
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
